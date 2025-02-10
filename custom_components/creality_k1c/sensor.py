@@ -118,5 +118,5 @@ class CrealitySensor(SensorEntity):
             "identifiers": {(DOMAIN, self._ci._host)},
             "name": "Creality K1C Printer",
             "manufacturer": "Creality",
-            "model": "K1C",  # fixme Update with your model, have not found a way to get this information
+            "model": "K1C",
         }

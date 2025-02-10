@@ -46,4 +46,3 @@ class CrealityK1CConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     return True  # Assuming any response with printStatus not TOKEN_ERROR is valid
         except Exception as e:
             return None  # Unable to connect
-        return None  # In case the connection could not be established or an unexpected error occurred
