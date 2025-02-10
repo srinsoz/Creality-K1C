@@ -90,11 +90,13 @@ class CrealitySensor(SensorEntity):
         """Return True if the sensor is available."""
         return self._available
 
-    def update_state(self, value: str):
+    def update_state(self, value):
         if value != self._value:
             self._value = value
             self.async_schedule_update_ha_state()
-            _LOGGER.info("sensor %s update to %s", self._attr_unique_id, self._value)
+            _LOGGER.info(
+                "sensor %s update to %s", self._attr_unique_id, str(self._value)
+            )
 
     @property
     def unique_id(self):
