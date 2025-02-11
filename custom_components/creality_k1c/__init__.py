@@ -100,5 +100,5 @@ class CrealityInterface:
             await self.send_heat_beat()
 
     def registerSensor(self, sensor: any):
-        _LOGGER.info("sensor %s registred", sensor.data_key)
-        self._sensors[sensor.data_key] = sensor
+        _LOGGER.info("sensor %s registred", sensor._data_key)
+        self._sensors[sensor._data_key] = sensor
