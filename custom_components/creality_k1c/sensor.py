@@ -2,10 +2,9 @@ import logging
 
 from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.components.sensor import SensorEntity
-from homeassistant.components.sensor.const import SensorDeviceClass
+from homeassistant.components.sensor.const import SensorDeviceClass, UnitOfTemperature
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .__init__ import CrealityInterface
@@ -57,7 +56,7 @@ async def async_setup_entry(
             "nozzleTemp",
             "Nozzle temperature",
             SensorDeviceClass.TEMPERATURE,
-            unit_of_measurement="°C",
+            unit_of_measurement=UnitOfTemperature.CELSIUS,
             icon="mdi:printer-3d-nozzle",
         ),
         CrealitySensor(
@@ -65,7 +64,7 @@ async def async_setup_entry(
             "bedTemp0",
             "Hot bed temperature",
             SensorDeviceClass.TEMPERATURE,
-            unit_of_measurement="°C",
+            unit_of_measurement=UnitOfTemperature.CELSIUS,
             icon="mdi:thermometer",
         ),
         # Add any additional sensors you need here
@@ -142,6 +141,7 @@ class CrealitySensor(CrealityBaseSensor, SensorEntity):
     ):
         super().__init__(ci, data_key, name_suffix, icon)
         self._unit_of_measurement = unit_of_measurement
+        self._native_unit_of_measurement = unit_of_measurement
         self._device_class = device_class
 
     def update_state(self, value):
@@ -155,7 +155,7 @@ class CrealitySensor(CrealityBaseSensor, SensorEntity):
         return self._value
 
     @property
-    def dedafsdvice_class(self):
+    def device_class(self):
         """Return the state of the sensor."""
         return self._device_class
 
@@ -164,6 +164,10 @@ class CrealitySensor(CrealityBaseSensor, SensorEntity):
         """Return the unit of measurement if defined."""
         return self._unit_of_measurement
 
+    @property
+    def native_unit_of_measurement(self):
+        """Return the unit of measurement if defined."""
+        return self._native_unit_of_measurement
 
 class CrealityStateSensor(CrealityBaseSensor, SensorEntity):
     """Defines a single Creality sensor."""
