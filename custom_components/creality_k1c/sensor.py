@@ -50,7 +50,7 @@ async def async_setup_entry(
         ),
         CrealitySensor(ci, "model", "Model", icon="mdi:format-color-text"),
         CrealitySensor(ci, "hostname", "Hostname", icon="mdi:format-color-text"),
-        CrealitySensor(ci, "state", "State",SensorDeviceClass.ENUM, icon="mdi:format-color-text"),
+        CrealitySensor(ci, "state", "State", icon="mdi:format-color-text"),
         CrealitySensor(ci, "modelVersion", "Firmware", icon="mdi:format-color-text"),
         CrealitySensor(
             ci,
@@ -158,7 +158,6 @@ class CrealitySensor(CrealityBaseSensor, SensorEntity):
     def unit_of_measurement(self):
         """Return the unit of measurement if defined."""
         return self._unit_of_measurement
-
 
 
 class CrealityBinarySensor(CrealityBaseSensor, BinarySensorEntity):
