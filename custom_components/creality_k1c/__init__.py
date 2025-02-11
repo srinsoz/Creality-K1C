@@ -71,7 +71,7 @@ class CrealityInterface:
                         self._attr[k] = v
                         if k in self._sensors:
                             _LOGGER.info("Update sensor %s to %s", k, v)
-                            self._sensors[k].update_state(str(v))
+                            self._sensors[k].update_state(v)
 
             except Exception as e:
                 _LOGGER.error("WebSocket invalid message: %s", e)
