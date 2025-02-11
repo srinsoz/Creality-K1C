@@ -155,43 +155,50 @@ class CrealitySensor(CrealityBaseSensor, SensorEntity):
         return self._value
 
     @property
+    def dedafsdvice_class(self):
+        """Return the state of the sensor."""
+        return self._device_class
+
+    @property
     def unit_of_measurement(self):
         """Return the unit of measurement if defined."""
         return self._unit_of_measurement
 
+
 class CrealityStateSensor(CrealityBaseSensor, SensorEntity):
-        """Defines a single Creality sensor."""
+    """Defines a single Creality sensor."""
 
-        _attr_should_poll = False
+    _attr_should_poll = False
+    _attr_device_class = SensorDeviceClass.ENUM
 
-        def __init__(
-                self,
-                ci: CrealityInterface,
-                data_key: str,
-                name_suffix: str,
-        ):
-            super().__init__(ci, data_key, name_suffix, "mdi:format-color-text")
-            self._device_class = SensorDeviceClass.ENUM
-            self._options = ['Idle','Printing','Success','Invalid']
+    def __init__(
+        self,
+        ci: CrealityInterface,
+        data_key: str,
+        name_suffix: str,
+    ):
+        super().__init__(ci, data_key, name_suffix, "mdi:format-color-text")
 
-        def update_state(self, raw_value):
-            if 0 <= raw_value < 3:
-                value = self._options[raw_value]
-            else:
-                value = 'Invalid'
-            if value != self._value:
-                self._value = value
-                self.async_schedule_update_ha_state()
+        self._options = ["Idle", "Printing", "Success", "Invalid"]
 
-        @property
-        def native_value(self):
-            """Return the state of the sensor."""
-            return self._value
+    def update_state(self, raw_value):
+        if 0 <= raw_value < 3:
+            value = self._options[raw_value]
+        else:
+            value = "Invalid"
+        if value != self._value:
+            self._value = value
+            self.async_schedule_update_ha_state()
 
-        @property
-        def options(self):
-            """Return the unit of measurement if defined."""
-            return self._options
+    @property
+    def native_value(self):
+        """Return the state of the sensor."""
+        return self._value
+
+    @property
+    def options(self):
+        """Return the unit of measurement if defined."""
+        return self._options
 
 
 class CrealityBinarySensor(CrealityBaseSensor, BinarySensorEntity):
