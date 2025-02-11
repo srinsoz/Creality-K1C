@@ -36,6 +36,7 @@ async def async_setup_entry(
         CrealitySensor(ci, "materialDetect", "Material detected"),
         CrealitySensor(ci, "model", "Model"),
         CrealitySensor(ci, "hostname", "Hostname"),
+        CrealitySensor(ci, "state", "State"),
         CrealitySensor(ci, "modelVersion", "Firmware"),
         CrealitySensor(
             ci,
